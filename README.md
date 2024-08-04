@@ -41,10 +41,34 @@ where $\mathbf{K}_2 \triangleq \dot{\mathbf{Y}}^H\mathbf{Y}$ and $\mathbf{K}_1 \
 ### Generalization (GCVD)
 Generalized CVD generalizes the quotient matrix to a balanced one, which can be taylored to fit CVD for modal analysis under various forcing conditions.
 
+## Functions
+The script `cvd.m` solves the CVD problem by providing the data matrices `X` and `dX`. Additional variables needed are the `Method` (default is `projective`) and the sampling time `dt`. 
+```matlab
+[U, Sigma, V, W] = cvd(X, dX, Method, dt)
+```
+the characteristic modes are columns of `V`, the characteristic cooridnates are in `U`, the characteristic projective modes are in `W`. 
+
+The script `gcvd.m` solves the GCVD problem by providing the data matrices `X1` and `X2` with options for different scenarios, e.g., `free` for free-decay and `forced` for forced cases.
+```matlab
+[U, V, S, Lambda, W, R] = gcvd(X1,X2,options)
+```
+the characteristic modes are columns of `V`, the characteristic cooridnates are in `U`, the characteristic projective modes are in `W`, and the characteristic values are provided in `R`. 
+
 ## Examples
-Find the provided examples in the Example folder to use the CVD/GCVD.
+Find the provided examples in the `Example` folder to use the CVD/GCVD. The examples are based on a 10-DOF lumped parameter system.
+`Example_ensemble_decomposition.m` illustrates the CVD's application in decomposing a set of measurements from different expeirmental setups.
+
+`Example_random_forcing.m` showcases the CVD's use in data-driven modal identification when system is subjected to random input.
+
+`Example_random_forcing_mode_shape.m` also visualizes the mode shape estimates used in the CVD paper.
 
 ## Cite the work
+Characteristic Value Decomposition: A Unifying Paradigm for Data-Driven Modal Analysis, Mechanical Systems and Signal Processing, DOI: https://doi.org/10.1016/j.ymssp.2024.111769
 ```
-Add bibliography information here
+@article{li2024characteristic,
+  title={Characteristic Value Decomposition: A Unifying Paradigm for Data-Driven Modal Analysis},
+  author={Li, Hewenxuan, Stein, Dalton L. and Chelidze, David},
+  journal={Mechanical Systems and Signal Processing},
+  year={2023}
+}
 ```
